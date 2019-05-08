@@ -1,17 +1,31 @@
 package com.nickelfox.mvp_test.main;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.LinearLayout;
 
 import com.nickelfox.mvp_test.R;
+import com.nickelfox.mvp_test.data.model.Article;
+import com.nickelfox.mvp_test.data.model.Model;
+import com.nickelfox.mvp_test.data.source.NewsListDataSource;
+import com.nickelfox.mvp_test.data.source.NewsListRepository;
+import com.nickelfox.mvp_test.util.ActivityUtils;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+
+
+    private MainContract.Presenter mPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +33,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        MainFragment mainFragment =
+                (MainFragment) getSupportFragmentManager().findFragmentById(R.id.container);
+
+        if (mainFragment == null) {
+            // Create the fragment
+            mainFragment = mainFragment.newInstance();
+            ActivityUtils.addFragmentToActivity(
+                    getSupportFragmentManager(), mainFragment, R.id.container);
+        }
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -28,6 +52,15 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+
+
+        mPresenter = new MainPresenter(NewsListRepository.getInstance(NewsListRepository.getInstance(new NewsListDataSource() {
+            @Override
+            public void fetchList(@NonNull LoadNewsCallback callback, String category, String country, String language) {
+
+            }
+        })),mainFragment);
     }
 
     @Override
@@ -36,6 +69,14 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        mPresenter.start();
+        mPresenter.getTopHeadings();
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -51,4 +92,8 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+
+
+
 }

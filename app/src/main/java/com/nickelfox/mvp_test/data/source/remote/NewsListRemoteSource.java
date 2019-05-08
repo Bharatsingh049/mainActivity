@@ -1,5 +1,7 @@
 package com.nickelfox.mvp_test.data.source.remote;
 
+import android.support.annotation.NonNull;
+
 import com.nickelfox.mvp_test.data.model.Model;
 import com.nickelfox.mvp_test.data.source.NewsListDataSource;
 
@@ -37,12 +39,13 @@ public class NewsListRemoteSource implements NewsListDataSource {
 
 
     @Override
-    public void fetchList(String category, String country, String language) {
+    public void fetchList(@NonNull final LoadNewsCallback callback, String category, String country, String language) {
         final Call<Model> modelCall = NewsListRemoteSource.getService().getModelList(category, sKey, country, language);
         modelCall.enqueue(new Callback<Model>() {
             @Override
             public void onResponse(Call<Model> call, Response<Model> response) {
-
+                Model model = response.body();
+                callback.onTasksLoaded(model.getArticles());
             }
 
             @Override
