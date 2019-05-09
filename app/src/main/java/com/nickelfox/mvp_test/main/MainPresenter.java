@@ -15,6 +15,8 @@ public class MainPresenter implements MainContract.Presenter {
     public MainPresenter(NewsListRepository mTasksRepository, MainContract.View mTasksView) {
         this.mTasksRepository = mTasksRepository;
         this.mTasksView = mTasksView;
+
+        mTasksView.setPresenter(this);
     }
 
 

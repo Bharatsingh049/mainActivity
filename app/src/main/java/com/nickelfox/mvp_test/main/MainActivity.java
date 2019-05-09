@@ -17,11 +17,13 @@ import com.nickelfox.mvp_test.data.model.Article;
 import com.nickelfox.mvp_test.data.model.Model;
 import com.nickelfox.mvp_test.data.source.NewsListDataSource;
 import com.nickelfox.mvp_test.data.source.NewsListRepository;
+import com.nickelfox.mvp_test.data.source.remote.NewsListRemoteSource;
+import com.nickelfox.mvp_test.main.dummy.DummyContent;
 import com.nickelfox.mvp_test.util.ActivityUtils;
 
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainFragment.OnListFragmentInteractionListener {
 
 
 
@@ -55,12 +57,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        mPresenter = new MainPresenter(NewsListRepository.getInstance(NewsListRepository.getInstance(new NewsListDataSource() {
-            @Override
-            public void fetchList(@NonNull LoadNewsCallback callback, String category, String country, String language) {
-
-            }
-        })),mainFragment);
+        mPresenter = new MainPresenter(NewsListRepository.getInstance(new NewsListRemoteSource()),mainFragment);
     }
 
     @Override
@@ -94,6 +91,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onListFragmentInteraction(Article item) {
 
-
+    }
 }

@@ -1,6 +1,7 @@
 package com.nickelfox.mvp_test.data.source.remote;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.nickelfox.mvp_test.data.model.Model;
 import com.nickelfox.mvp_test.data.source.NewsListDataSource;
@@ -50,6 +51,7 @@ public class NewsListRemoteSource implements NewsListDataSource {
 
             @Override
             public void onFailure(Call<Model> call, Throwable t) {
+                Log.e( "onFailure: ","error Occurred",t );
                 return;
             }
         });
