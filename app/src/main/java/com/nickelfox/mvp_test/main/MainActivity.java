@@ -1,5 +1,6 @@
 package com.nickelfox.mvp_test.main;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnLi
 
 
     private MainContract.Presenter mPresenter;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

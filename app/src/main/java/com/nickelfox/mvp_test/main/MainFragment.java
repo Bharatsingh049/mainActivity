@@ -1,5 +1,6 @@
 package com.nickelfox.mvp_test.main;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -38,6 +39,8 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     private List<Article> mList;
 
+    private ProgressDialog mProgressDialog;
+
     private static MainFragmentRecyclerViewAdapter sMainFragmentRecyclerViewAdapter;
 
     /**
@@ -69,6 +72,11 @@ public class MainFragment extends Fragment implements MainContract.View {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }*/
         mList=new ArrayList<>();
+        mProgressDialog=new ProgressDialog(getContext());
+        mProgressDialog.setIndeterminate(true);
+        mProgressDialog.setTitle("Please wait");
+        mProgressDialog.setMessage("Loading...");
+        mProgressDialog.setCancelable(false);
     }
 
     @Override
@@ -130,12 +138,14 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     @Override
     public void showLoading() {
-
+        mProgressDialog.show();
     }
 
     @Override
     public void hideLoading() {
-
+        if (mProgressDialog.isShowing()){
+            mProgressDialog.dismiss();
+        }
     }
 
     @Override

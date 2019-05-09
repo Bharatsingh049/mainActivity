@@ -8,13 +8,13 @@ import java.util.List;
 
 public class MainPresenter implements MainContract.Presenter {
 
-    private final NewsListRepository mTasksRepository;
+    private final NewsListRepository mMainRepository;
 
-    private final MainContract.View mTasksView;
+    private final MainContract.View mMainView;
 
     public MainPresenter(NewsListRepository mTasksRepository, MainContract.View mTasksView) {
-        this.mTasksRepository = mTasksRepository;
-        this.mTasksView = mTasksView;
+        this.mMainRepository = mTasksRepository;
+        this.mMainView = mTasksView;
 
         mTasksView.setPresenter(this);
     }
@@ -24,10 +24,11 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void getTopHeadings() {
-        mTasksRepository.fetchList(new NewsListDataSource.LoadNewsCallback() {
+        mMainRepository.fetchList(new NewsListDataSource.LoadNewsCallback() {
             @Override
             public void onTasksLoaded(List<Article> newsList) {
-                mTasksView.showList(newsList);
+                mMainView.showList(newsList);
+                mMainView.hideLoading();
             }
 
             @Override
@@ -35,6 +36,8 @@ public class MainPresenter implements MainContract.Presenter {
 
             }
         },"business","In","en");
+        mMainView.showLoading();
+
     }
 
     @Override
