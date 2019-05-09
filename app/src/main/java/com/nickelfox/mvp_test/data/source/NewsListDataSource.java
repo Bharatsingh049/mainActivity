@@ -10,11 +10,11 @@ import java.util.List;
 public interface NewsListDataSource {
     interface LoadNewsCallback {
 
-        void onTasksLoaded(List<Article> newsList);
+        void onTasksLoaded(@NonNull List<Article> newsList,@NonNull int listNo);
 
-        void onDataNotAvailable();
+        void onDataNotAvailable(@NonNull String errorMessage);
     }
-    void fetchList(@NonNull LoadNewsCallback callback, String category, String country, String language);
+    void fetchList(@NonNull LoadNewsCallback callback, String category, String country, String language,@NonNull int listNo);
 
 
 

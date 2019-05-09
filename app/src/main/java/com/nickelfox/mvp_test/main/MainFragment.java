@@ -1,8 +1,11 @@
 package com.nickelfox.mvp_test.main;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.icu.text.ScientificNumberFormatter;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
@@ -12,11 +15,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.nickelfox.mvp_test.R;
 import com.nickelfox.mvp_test.data.model.Article;
-import com.nickelfox.mvp_test.main.dummy.DummyContent;
-import com.nickelfox.mvp_test.main.dummy.DummyContent.DummyItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,11 +39,18 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     private MainContract.Presenter mPresenter;
 
-    private List<Article> mList;
+    private List<Article> businessList,entertainmentList
+            ,healthList,scienceList,sportsList,technologyList;
 
     private ProgressDialog mProgressDialog;
 
+    @SuppressLint("StaticFieldLeak")
     private static MainFragmentRecyclerViewAdapter sMainFragmentRecyclerViewAdapter;
+
+    @SuppressLint("StaticFieldLeak")
+    private static HorizontalRecyclerViewAdapter businessAdapter,entertainmentAdapter
+            ,healthAdapter,scienceAdapter,sportsAdapter,technologyAdapter;
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -71,7 +80,22 @@ public class MainFragment extends Fragment implements MainContract.View {
         /*if (getArguments() != null) {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }*/
-        mList=new ArrayList<>();
+        //Initialising Lists
+        businessList=new ArrayList<>();
+        entertainmentList=new ArrayList<>();
+        healthList=new ArrayList<>();
+        scienceList=new ArrayList<>();
+        sportsList=new ArrayList<>();
+        technologyList=new ArrayList<>();
+
+        //Initialising Adapters
+        businessAdapter=new HorizontalRecyclerViewAdapter(businessList);
+        entertainmentAdapter=new HorizontalRecyclerViewAdapter(entertainmentList);
+        healthAdapter=new HorizontalRecyclerViewAdapter(healthList);
+        scienceAdapter=new HorizontalRecyclerViewAdapter(scienceList);
+        sportsAdapter=new HorizontalRecyclerViewAdapter(sportsList);
+        technologyAdapter=new HorizontalRecyclerViewAdapter(technologyList);
+
         mProgressDialog=new ProgressDialog(getContext());
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setTitle("Please wait");
@@ -85,17 +109,12 @@ public class MainFragment extends Fragment implements MainContract.View {
         View view = inflater.inflate(R.layout.fragment_main_list, container, false);
 
         // Set the adapter
-        sMainFragmentRecyclerViewAdapter=new MainFragmentRecyclerViewAdapter(mList, mListener);
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(sMainFragmentRecyclerViewAdapter);
-        }
+           view=initRecyclerView(view);
+
+        //Context context = view.getContext();
+
+
+        //recyclerView.setAdapter(sMainFragmentRecyclerViewAdapter);
         FloatingActionButton fab =
                 (FloatingActionButton) getActivity().findViewById(R.id.fab);
 
@@ -103,13 +122,37 @@ public class MainFragment extends Fragment implements MainContract.View {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mPresenter.getTopHeadings();
+                //mPresenter.getTopHeadings();
             }
         });
 
         return view;
     }
 
+
+    private View initRecyclerView(View view){
+        RecyclerView businessRecyclerView = (RecyclerView) view.findViewById(R.id.Business_RecyclerView);
+        businessRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        RecyclerView entertainmentRecyclerView = (RecyclerView) view.findViewById(R.id.Entertainment_RecyclerView);
+        entertainmentRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        RecyclerView healthRecyclerView = (RecyclerView) view.findViewById(R.id.Health_RecyclerView);
+        healthRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        RecyclerView scienceRecyclerView = (RecyclerView) view.findViewById(R.id.Science_RecyclerView);
+        scienceRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        RecyclerView sportsRecyclerView = (RecyclerView) view.findViewById(R.id.Sports_RecyclerView);
+        sportsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+        RecyclerView technologyRecyclerView = (RecyclerView) view.findViewById(R.id.Technology_RecyclerView);
+        technologyRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        businessRecyclerView.setAdapter(businessAdapter);
+        entertainmentRecyclerView.setAdapter(entertainmentAdapter);
+        healthRecyclerView.setAdapter(healthAdapter);
+        scienceRecyclerView.setAdapter(scienceAdapter);
+        sportsRecyclerView.setAdapter(sportsAdapter);
+        technologyRecyclerView.setAdapter(technologyAdapter);
+        return view;
+
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -128,11 +171,59 @@ public class MainFragment extends Fragment implements MainContract.View {
         mListener = null;
     }
 
-    @Override
+    /*@Override
     public void showList(List<Article> list) {
         int temp = list.size();
-        this.mList=list;
-        sMainFragmentRecyclerViewAdapter.setList(mList);
+        //this.mList=list;
+        //sMainFragmentRecyclerViewAdapter.setList(mList);
+        Log.d("showList: ",temp+"");
+    }*/
+
+    @Override
+    public void showBusinessList(@NonNull List<Article> businessList) {
+        int temp = businessList.size();
+        this.businessList=businessList;
+        businessAdapter.setList(businessList);
+        Log.d("showList: ",temp+"");
+    }
+
+    @Override
+    public void showEntertainmentList(@NonNull List<Article> entertainmentList) {
+        int temp = entertainmentList.size();
+        this.entertainmentList=entertainmentList;
+        entertainmentAdapter.setList(this.entertainmentList);
+        Log.d("showList: ",temp+"");
+    }
+
+    @Override
+    public void showHealthList(@NonNull List<Article> healthList) {
+        int temp = healthList.size();
+        this.healthList=healthList;
+        healthAdapter.setList(this.healthList);
+        Log.d("showList: ",temp+"");
+    }
+
+    @Override
+    public void showScienceList(@NonNull List<Article> scienceList) {
+        int temp = scienceList.size();
+        this.scienceList=scienceList;
+        scienceAdapter.setList(this.scienceList);
+        Log.d("showList: ",temp+"");
+    }
+
+    @Override
+    public void showSportsList(@NonNull List<Article> sportsList) {
+        int temp = sportsList.size();
+        this.sportsList=sportsList;
+        sportsAdapter.setList(this.sportsList);
+        Log.d("showList: ",temp+"");
+    }
+
+    @Override
+    public void showTechnologyList(@NonNull List<Article> technologyList) {
+        int temp = technologyList.size();
+        this.technologyList=technologyList;
+        technologyAdapter.setList(this.technologyList);
         Log.d("showList: ",temp+"");
     }
 
@@ -146,6 +237,11 @@ public class MainFragment extends Fragment implements MainContract.View {
         if (mProgressDialog.isShowing()){
             mProgressDialog.dismiss();
         }
+    }
+
+    @Override
+    public void showError(@NonNull String errorMessage) {
+        Toast.makeText(getContext(), "Error : "+errorMessage, Toast.LENGTH_SHORT).show();
     }
 
     @Override

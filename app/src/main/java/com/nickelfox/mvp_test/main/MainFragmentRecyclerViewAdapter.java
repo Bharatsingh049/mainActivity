@@ -13,12 +13,12 @@ import com.nickelfox.mvp_test.R;
 
 import com.nickelfox.mvp_test.data.model.Article;
 import com.nickelfox.mvp_test.main.MainFragment.OnListFragmentInteractionListener;
-import com.nickelfox.mvp_test.main.dummy.DummyContent.DummyItem;
+
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link DummyItem} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link Article} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */

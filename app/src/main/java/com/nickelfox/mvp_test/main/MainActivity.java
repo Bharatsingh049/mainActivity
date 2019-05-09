@@ -1,28 +1,19 @@
 package com.nickelfox.mvp_test.main;
 
-import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
 
 import com.nickelfox.mvp_test.R;
 import com.nickelfox.mvp_test.data.model.Article;
-import com.nickelfox.mvp_test.data.model.Model;
-import com.nickelfox.mvp_test.data.source.NewsListDataSource;
 import com.nickelfox.mvp_test.data.source.NewsListRepository;
-import com.nickelfox.mvp_test.data.source.remote.NewsListRemoteSource;
-import com.nickelfox.mvp_test.main.dummy.DummyContent;
+import com.nickelfox.mvp_test.data.source.remote.NewsListRemoteRepository;
 import com.nickelfox.mvp_test.util.ActivityUtils;
-
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MainFragment.OnListFragmentInteractionListener {
 
@@ -60,7 +51,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnLi
 
 
 
-        mPresenter = new MainPresenter(NewsListRepository.getInstance(new NewsListRemoteSource()),mainFragment);
+        mPresenter = new MainPresenter(NewsListRepository.getInstance(new NewsListRemoteRepository()),mainFragment);
     }
 
     @Override
