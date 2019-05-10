@@ -4,14 +4,13 @@ import android.support.annotation.NonNull;
 
 import com.nickelfox.mvp_test.BasePresenter;
 import com.nickelfox.mvp_test.BaseView;
-import com.nickelfox.mvp_test.data.model.Article;
-import com.nickelfox.mvp_test.data.model.Model;
+import com.nickelfox.mvp_test.data.source.remote.model.Article;
 
 import java.util.List;
 
-public interface MainContract  {
+public interface MainContract {
 
-    interface View extends BaseView<Presenter>{
+    interface View extends BaseView<Presenter> {
 
         void showBusinessList(@NonNull List<Article> businessList);
 
@@ -34,7 +33,7 @@ public interface MainContract  {
 
     }
 
-    interface Presenter extends BasePresenter{
+    interface Presenter extends BasePresenter {
 
         void getTopHeadings();
 

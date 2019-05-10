@@ -1,5 +1,5 @@
 
-package com.nickelfox.mvp_test.data.model;
+package com.nickelfox.mvp_test.data.source.remote.model;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

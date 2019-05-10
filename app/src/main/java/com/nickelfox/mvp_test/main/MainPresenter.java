@@ -2,7 +2,7 @@ package com.nickelfox.mvp_test.main;
 
 import android.support.annotation.NonNull;
 
-import com.nickelfox.mvp_test.data.model.Article;
+import com.nickelfox.mvp_test.data.source.remote.model.Article;
 import com.nickelfox.mvp_test.data.source.NewsListDataSource;
 import com.nickelfox.mvp_test.data.source.NewsListRepository;
 
@@ -14,9 +14,9 @@ public class MainPresenter implements MainContract.Presenter {
 
     private String[] category = {"business", "entertainment", "health", "science", "sports", "technology"};
 
-    private final MainContract.View mMainView;
+    private MainContract.View mMainView;
 
-    public MainPresenter(NewsListRepository mTasksRepository, MainContract.View mTasksView) {
+    MainPresenter(NewsListRepository mTasksRepository, MainContract.View mTasksView) {
         this.mMainRepository = mTasksRepository;
         this.mMainView = mTasksView;
 
@@ -24,38 +24,44 @@ public class MainPresenter implements MainContract.Presenter {
     }
 
 
-
-
     @Override
     public void getTopHeadings() {
 
-        for (int i=0;i<6;i++){
-            getList(category[i],i);
+        for (int i = 0; i < 6; i++) {
+            getList(category[i], i);
         }
+
 
     }
 
-    private void getList(@NonNull String category,final int list_No){
+    private void getList(@NonNull String category, final int list_No) {
         mMainRepository.fetchList(new NewsListDataSource.LoadNewsCallback() {
 
-
             @Override
-            public void onTasksLoaded(@NonNull List<Article> newsList, @NonNull int listNo) {
+            public void onTasksLoaded(@NonNull List<Article> newsList, int listNo) {
 
-                switch (list_No){
-                    case 0: mMainView.showBusinessList(newsList);
+                if (mMainView != null) {
+                    switch (list_No) {
+                        case 0:
+                            mMainView.showBusinessList(newsList);
                             break;
-                    case 1: mMainView.showEntertainmentList(newsList);
-                        break;
-                    case 2: mMainView.showHealthList(newsList);
-                        break;
-                    case 3: mMainView.showScienceList(newsList);
-                        break;
-                    case 4: mMainView.showSportsList(newsList);
-                        break;
-                    case 5: mMainView.showTechnologyList(newsList);
+                        case 1:
+                            mMainView.showEntertainmentList(newsList);
+                            break;
+                        case 2:
+                            mMainView.showHealthList(newsList);
+                            break;
+                        case 3:
+                            mMainView.showScienceList(newsList);
+                            break;
+                        case 4:
+                            mMainView.showSportsList(newsList);
+                            break;
+                        case 5:
+                            mMainView.showTechnologyList(newsList);
                             mMainView.hideLoading();
-                        break;
+                            break;
+                    }
                 }
             }
 
@@ -65,13 +71,20 @@ public class MainPresenter implements MainContract.Presenter {
                 mMainView.showError(errorMessage);
             }
 
-        },category,"In","en",list_No);
+        }, category, "In", "en", list_No);
         mMainView.showLoading();
     }
 
 
     @Override
-    public void start() {
+    public void start(MainContract.View view) {
+        if (mMainView == null) {
+            mMainView = view;
+        }
+    }
 
+    @Override
+    public void onDestroy() {
+        mMainView = null;
     }
 }

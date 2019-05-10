@@ -1,289 +1,319 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
     android:id="@+id/Refresh_layout"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
     android:name="com.nickelfox.mvp_test.main.MainFragment"
-    tools:context=".main.MainFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#eee"
     android:orientation="vertical"
-    tools:showIn="@layout/activity_main"
-    android:background="#eee">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".main.MainFragment"
+    tools:showIn="@layout/activity_main">
 
     <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:id="@+id/ScrollView">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <LinearLayout
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
                 android:orientation="vertical">
+
                 <LinearLayout
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     android:orientation="horizontal">
-                    <TextView
-                        android:layout_gravity="center_vertical"
 
-                        android:layout_marginTop="10dp"
-                        android:textStyle="bold"
-                        android:textColor="#000"
-                        android:textSize="20dp"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="10dp"
+                        android:layout_weight="1"
                         android:text="Business"
-                        />
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
                     <TextView
+                        android:id="@+id/cat_business"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:fontFamily="@font/opensans_regular"
                         android:layout_marginTop="10dp"
-                        android:textColor="@color/colorAccent"
-                        android:textSize="13dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
                         android:text="MORE"
-                        android:id="@+id/Cat_Business"/>
-                </LinearLayout>
-                <android.support.v7.widget.RecyclerView
-                    android:nestedScrollingEnabled="false"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="#eee"
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:id="@+id/Business_RecyclerView"/>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_gravity="center_vertical"
-
-                        android:textStyle="bold"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Entertainment" />
-                    <TextView
-                        android:layout_gravity="center_vertical"
-
                         android:textColor="@color/colorAccent"
                         android:textSize="13sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="MORE"
-                        android:id="@+id/Cat_Entertainment"/>
+                        tools:ignore="HardcodedText" />
                 </LinearLayout>
+
                 <android.support.v7.widget.RecyclerView
-                    android:nestedScrollingEnabled="false"
+                    android:id="@+id/business_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="#eee"
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:id="@+id/Entertainment_RecyclerView"/>
+                    android:orientation="horizontal"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
                 android:orientation="vertical">
+
                 <LinearLayout
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     android:orientation="horizontal">
-                    <TextView
-                        android:layout_gravity="center_vertical"
 
-                        android:textStyle="bold"
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Entertainment"
                         android:textColor="#000"
                         android:textSize="20sp"
-                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/cat_entertainment"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="MORE"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp"
+                        tools:ignore="HardcodedText" />
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/entertainment_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#eee"
+                    android:orientation="horizontal"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
                         android:text="Health"
-                        />
-                    <TextView
-                        android:layout_gravity="center_vertical"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText,InefficientWeight" />
 
-                        android:textColor="@color/colorAccent"
-                        android:textSize="13sp"
+                    <TextView
+                        android:id="@+id/cat_health"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:text="MORE"
-                        android:id="@+id/Cat_Health"/>
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp"
+                        tools:ignore="HardcodedText" />
                 </LinearLayout>
+
                 <android.support.v7.widget.RecyclerView
-                    android:nestedScrollingEnabled="false"
+                    android:id="@+id/health_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="#eee"
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:id="@+id/Health_RecyclerView"/>
+                    android:orientation="horizontal"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
                 android:orientation="vertical">
+
                 <LinearLayout
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     android:orientation="horizontal">
+
                     <TextView
-                        android:layout_gravity="center_vertical"
-                        android:textStyle="bold"
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
                         android:text="Science"
-                        />
-                    <TextView
-                        android:layout_gravity="center_vertical"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
 
-                        android:textColor="@color/colorAccent"
-                        android:textSize="13sp"
+                    <TextView
+                        android:id="@+id/cat_science"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:text="MORE"
-                        android:id="@+id/Cat_Science"/>
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp"
+                        tools:ignore="HardcodedText" />
                 </LinearLayout>
+
                 <android.support.v7.widget.RecyclerView
-                    android:nestedScrollingEnabled="false"
+                    android:id="@+id/science_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="#eee"
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:id="@+id/Science_RecyclerView"/>
+                    android:orientation="horizontal"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
                 android:orientation="vertical">
+
                 <LinearLayout
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     android:orientation="horizontal">
-                    <TextView
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
 
-                        android:textColor="#000"
-                        android:textSize="20sp"
-                        android:layout_weight="1"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
+
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
                         android:text="Sports"
-                        />
-                    <TextView
-                        android:layout_gravity="center_vertical"
+                        android:textColor="#000"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
 
-                        android:textColor="@color/colorAccent"
-                        android:textSize="13sp"
+                    <TextView
+                        android:id="@+id/cat_sports"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:text="MORE"
-                        android:id="@+id/Cat_Sports"/>
+                        android:textColor="@color/colorAccent"
+                        android:textSize="13sp"
+                        tools:ignore="HardcodedText" />
                 </LinearLayout>
+
                 <android.support.v7.widget.RecyclerView
-                    android:nestedScrollingEnabled="false"
+                    android:id="@+id/sports_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="#eee"
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:id="@+id/Sports_RecyclerView"/>
+                    android:orientation="horizontal"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
             </LinearLayout>
 
             <LinearLayout
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
                 android:orientation="vertical">
+
                 <LinearLayout
-                    android:layout_marginEnd="10dp"
-                    android:layout_marginRight="10dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginRight="10dp"
                     android:orientation="horizontal">
-                    <TextView
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
 
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_weight="1"
+                        android:text="Technology"
                         android:textColor="#000"
                         android:textSize="20sp"
-                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        tools:ignore="HardcodedText" />
+
+                    <TextView
+                        android:id="@+id/cat_technology"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Technology"
-                        />
-                    <TextView
                         android:layout_gravity="center_vertical"
-
+                        android:text="MORE"
                         android:textColor="@color/colorAccent"
                         android:textSize="13sp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="MORE"
-                        android:id="@+id/Cat_Technology"/>
+                        tools:ignore="HardcodedText" />
                 </LinearLayout>
+
                 <android.support.v7.widget.RecyclerView
-                    android:nestedScrollingEnabled="false"
+                    android:id="@+id/technology_recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="130dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
                     android:background="#eee"
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp"
-                    android:id="@+id/Technology_RecyclerView"/>
+                    android:orientation="horizontal"
+                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
             </LinearLayout>
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
-</android.support.v4.widget.SwipeRefreshLayout>
-<!--
+</android.support.v4.widget.SwipeRefreshLayout><!--
 <android.support.v7.widget.RecyclerView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"

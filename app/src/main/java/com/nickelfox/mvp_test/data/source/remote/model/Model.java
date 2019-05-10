@@ -1,10 +1,10 @@
 
-package com.nickelfox.mvp_test.data.model;
+package com.nickelfox.mvp_test.data.source.remote.model;
 
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.nickelfox.mvp_test.data.model.Article;
 
 public final class Model {
 

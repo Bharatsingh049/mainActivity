@@ -1,6 +1,7 @@
 package com.nickelfox.mvp_test.main;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.nickelfox.mvp_test.R;
 
-import com.nickelfox.mvp_test.data.model.Article;
+import com.nickelfox.mvp_test.data.source.remote.model.Article;
 import com.nickelfox.mvp_test.main.MainFragment.OnListFragmentInteractionListener;
 
 
@@ -24,25 +25,26 @@ import java.util.List;
  */
 public class MainFragmentRecyclerViewAdapter extends RecyclerView.Adapter<MainFragmentRecyclerViewAdapter.ViewHolder> {
 
-    private  List<Article> mValues;
-    private  OnListFragmentInteractionListener mListener;
-    private  Context MyContext;
+    private List<Article> mValues;
+    private OnListFragmentInteractionListener mListener;
+    private Context MyContext;
 
     public MainFragmentRecyclerViewAdapter(List<Article> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        MyContext=parent.getContext();
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        MyContext = parent.getContext();
         View view = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.fragment_main, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         Glide.with(MyContext)
                 .load(mValues.get(position).getUrlToImage())
@@ -62,8 +64,8 @@ public class MainFragmentRecyclerViewAdapter extends RecyclerView.Adapter<MainFr
         });
     }
 
-    public  void setList(List<Article> list){
-        mValues=list;
+    public void setList(List<Article> list) {
+        mValues = list;
         notifyDataSetChanged();
     }
 
@@ -73,18 +75,19 @@ public class MainFragmentRecyclerViewAdapter extends RecyclerView.Adapter<MainFr
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
-        public final ImageView mImageView;
-        public final TextView mContentView;
-        public Article mItem;
+        final View mView;
+        final ImageView mImageView;
+        final TextView mContentView;
+        Article mItem;
 
-        public ViewHolder(View view) {
+        ViewHolder(View view) {
             super(view);
             mView = view;
             mImageView = view.findViewById(R.id.Separate_Image);
-            mContentView = view.findViewById(R.id.Separate_Title);
+            mContentView = view.findViewById(R.id.separate_title);
         }
 
+        @NonNull
         @Override
         public String toString() {
             return super.toString() + " '" + mContentView.getText() + "'";

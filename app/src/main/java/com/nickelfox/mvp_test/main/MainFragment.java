@@ -3,13 +3,10 @@ package com.nickelfox.mvp_test.main;
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.icu.text.ScientificNumberFormatter;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,10 +15,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.nickelfox.mvp_test.R;
-import com.nickelfox.mvp_test.data.model.Article;
+import com.nickelfox.mvp_test.data.source.remote.model.Article;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * A fragment representing a list of Items.
@@ -39,17 +37,15 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     private MainContract.Presenter mPresenter;
 
-    private List<Article> businessList,entertainmentList
-            ,healthList,scienceList,sportsList,technologyList;
+    private List<Article> businessList, entertainmentList, healthList, scienceList, sportsList, technologyList;
 
     private ProgressDialog mProgressDialog;
 
-    @SuppressLint("StaticFieldLeak")
-    private static MainFragmentRecyclerViewAdapter sMainFragmentRecyclerViewAdapter;
+    /*@SuppressLint("StaticFieldLeak")
+    private static MainFragmentRecyclerViewAdapter sMainFragmentRecyclerViewAdapter;*/
 
     @SuppressLint("StaticFieldLeak")
-    private static HorizontalRecyclerViewAdapter businessAdapter,entertainmentAdapter
-            ,healthAdapter,scienceAdapter,sportsAdapter,technologyAdapter;
+    private static HorizontalRecyclerViewAdapter businessAdapter, entertainmentAdapter, healthAdapter, scienceAdapter, sportsAdapter, technologyAdapter;
 
 
     /**
@@ -63,7 +59,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     public void onResume() {
         super.onResume();
 
-    mPresenter.getTopHeadings();
+        mPresenter.getTopHeadings();
     }
 
     // TODO: Customize parameter initialization
@@ -81,22 +77,22 @@ public class MainFragment extends Fragment implements MainContract.View {
             mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
         }*/
         //Initialising Lists
-        businessList=new ArrayList<>();
-        entertainmentList=new ArrayList<>();
-        healthList=new ArrayList<>();
-        scienceList=new ArrayList<>();
-        sportsList=new ArrayList<>();
-        technologyList=new ArrayList<>();
+        businessList = new ArrayList<>();
+        entertainmentList = new ArrayList<>();
+        healthList = new ArrayList<>();
+        scienceList = new ArrayList<>();
+        sportsList = new ArrayList<>();
+        technologyList = new ArrayList<>();
 
         //Initialising Adapters
-        businessAdapter=new HorizontalRecyclerViewAdapter(businessList);
-        entertainmentAdapter=new HorizontalRecyclerViewAdapter(entertainmentList);
-        healthAdapter=new HorizontalRecyclerViewAdapter(healthList);
-        scienceAdapter=new HorizontalRecyclerViewAdapter(scienceList);
-        sportsAdapter=new HorizontalRecyclerViewAdapter(sportsList);
-        technologyAdapter=new HorizontalRecyclerViewAdapter(technologyList);
+        businessAdapter = new HorizontalRecyclerViewAdapter(businessList);
+        entertainmentAdapter = new HorizontalRecyclerViewAdapter(entertainmentList);
+        healthAdapter = new HorizontalRecyclerViewAdapter(healthList);
+        scienceAdapter = new HorizontalRecyclerViewAdapter(scienceList);
+        sportsAdapter = new HorizontalRecyclerViewAdapter(sportsList);
+        technologyAdapter = new HorizontalRecyclerViewAdapter(technologyList);
 
-        mProgressDialog=new ProgressDialog(getContext());
+        mProgressDialog = new ProgressDialog(getContext());
         mProgressDialog.setIndeterminate(true);
         mProgressDialog.setTitle("Please wait");
         mProgressDialog.setMessage("Loading...");
@@ -104,19 +100,19 @@ public class MainFragment extends Fragment implements MainContract.View {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_main_list, container, false);
 
         // Set the adapter
-           view=initRecyclerView(view);
+        view = initRecyclerView(view);
 
         //Context context = view.getContext();
 
 
         //recyclerView.setAdapter(sMainFragmentRecyclerViewAdapter);
         FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.fab);
+                (FloatingActionButton) Objects.requireNonNull(getActivity()).findViewById(R.id.fab);
 
         //fab.setImageResource(R.drawable.ic_add);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -130,19 +126,13 @@ public class MainFragment extends Fragment implements MainContract.View {
     }
 
 
-    private View initRecyclerView(View view){
-        RecyclerView businessRecyclerView = (RecyclerView) view.findViewById(R.id.Business_RecyclerView);
-        businessRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        RecyclerView entertainmentRecyclerView = (RecyclerView) view.findViewById(R.id.Entertainment_RecyclerView);
-        entertainmentRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        RecyclerView healthRecyclerView = (RecyclerView) view.findViewById(R.id.Health_RecyclerView);
-        healthRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        RecyclerView scienceRecyclerView = (RecyclerView) view.findViewById(R.id.Science_RecyclerView);
-        scienceRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        RecyclerView sportsRecyclerView = (RecyclerView) view.findViewById(R.id.Sports_RecyclerView);
-        sportsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
-        RecyclerView technologyRecyclerView = (RecyclerView) view.findViewById(R.id.Technology_RecyclerView);
-        technologyRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false));
+    private View initRecyclerView(View view) {
+        RecyclerView businessRecyclerView = view.findViewById(R.id.business_recyclerView);
+        RecyclerView entertainmentRecyclerView = view.findViewById(R.id.entertainment_recyclerView);
+        RecyclerView healthRecyclerView = view.findViewById(R.id.health_recyclerView);
+        RecyclerView scienceRecyclerView = view.findViewById(R.id.science_recyclerView);
+        RecyclerView sportsRecyclerView = view.findViewById(R.id.sports_recyclerView);
+        RecyclerView technologyRecyclerView = view.findViewById(R.id.technology_recyclerView);
 
         businessRecyclerView.setAdapter(businessAdapter);
         entertainmentRecyclerView.setAdapter(entertainmentAdapter);
@@ -182,49 +172,49 @@ public class MainFragment extends Fragment implements MainContract.View {
     @Override
     public void showBusinessList(@NonNull List<Article> businessList) {
         int temp = businessList.size();
-        this.businessList=businessList;
+        this.businessList = businessList;
         businessAdapter.setList(businessList);
-        Log.d("showList: ",temp+"");
+        Log.d("showList: ", temp + "");
     }
 
     @Override
     public void showEntertainmentList(@NonNull List<Article> entertainmentList) {
         int temp = entertainmentList.size();
-        this.entertainmentList=entertainmentList;
+        this.entertainmentList = entertainmentList;
         entertainmentAdapter.setList(this.entertainmentList);
-        Log.d("showList: ",temp+"");
+        Log.d("showList: ", temp + "");
     }
 
     @Override
     public void showHealthList(@NonNull List<Article> healthList) {
         int temp = healthList.size();
-        this.healthList=healthList;
+        this.healthList = healthList;
         healthAdapter.setList(this.healthList);
-        Log.d("showList: ",temp+"");
+        Log.d("showList: ", temp + "");
     }
 
     @Override
     public void showScienceList(@NonNull List<Article> scienceList) {
         int temp = scienceList.size();
-        this.scienceList=scienceList;
+        this.scienceList = scienceList;
         scienceAdapter.setList(this.scienceList);
-        Log.d("showList: ",temp+"");
+        Log.d("showList: ", temp + "");
     }
 
     @Override
     public void showSportsList(@NonNull List<Article> sportsList) {
         int temp = sportsList.size();
-        this.sportsList=sportsList;
+        this.sportsList = sportsList;
         sportsAdapter.setList(this.sportsList);
-        Log.d("showList: ",temp+"");
+        Log.d("showList: ", temp + "");
     }
 
     @Override
     public void showTechnologyList(@NonNull List<Article> technologyList) {
         int temp = technologyList.size();
-        this.technologyList=technologyList;
+        this.technologyList = technologyList;
         technologyAdapter.setList(this.technologyList);
-        Log.d("showList: ",temp+"");
+        Log.d("showList: ", temp + "");
     }
 
     @Override
@@ -234,21 +224,20 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     @Override
     public void hideLoading() {
-        if (mProgressDialog.isShowing()){
+        if (mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
         }
     }
 
     @Override
     public void showError(@NonNull String errorMessage) {
-        Toast.makeText(getContext(), "Error : "+errorMessage, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), "Error : " + errorMessage, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void setPresenter(MainContract.Presenter presenter) {
-        mPresenter=presenter;
+        mPresenter = presenter;
     }
-
 
 
     /**

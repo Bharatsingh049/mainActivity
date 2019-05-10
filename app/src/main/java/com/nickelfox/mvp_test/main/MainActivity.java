@@ -1,5 +1,6 @@
 package com.nickelfox.mvp_test.main;
 
+import android.arch.persistence.room.Database;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,7 +11,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.nickelfox.mvp_test.R;
-import com.nickelfox.mvp_test.data.model.Article;
+import com.nickelfox.mvp_test.data.source.local.NewsDatabase;
+import com.nickelfox.mvp_test.data.source.local.NewsListLocalRepository;
+import com.nickelfox.mvp_test.data.source.remote.model.Article;
 import com.nickelfox.mvp_test.data.source.NewsListRepository;
 import com.nickelfox.mvp_test.data.source.remote.NewsListRemoteRepository;
 import com.nickelfox.mvp_test.util.ActivityUtils;
@@ -18,9 +21,9 @@ import com.nickelfox.mvp_test.util.ActivityUtils;
 public class MainActivity extends AppCompatActivity implements MainFragment.OnListFragmentInteractionListener {
 
 
-
     private MainContract.Presenter mPresenter;
 
+    private MainFragment mainFragment;
 
 
     @Override
@@ -30,12 +33,12 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnLi
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        MainFragment mainFragment =
+        mainFragment =
                 (MainFragment) getSupportFragmentManager().findFragmentById(R.id.container);
 
         if (mainFragment == null) {
             // Create the fragment
-            mainFragment = mainFragment.newInstance();
+            mainFragment = MainFragment.newInstance();
             ActivityUtils.addFragmentToActivity(
                     getSupportFragmentManager(), mainFragment, R.id.container);
         }
@@ -50,8 +53,8 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnLi
         });
 
 
-
-        mPresenter = new MainPresenter(NewsListRepository.getInstance(new NewsListRemoteRepository()),mainFragment);
+        mPresenter = new MainPresenter(NewsListRepository.getInstance(NewsListRemoteRepository.getInstance()
+                ,NewsListLocalRepository.getInstance(NewsDatabase.getInstance(getApplicationContext()).newsDao())), mainFragment);
     }
 
     @Override
@@ -64,10 +67,16 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnLi
     @Override
     public void onResume() {
         super.onResume();
-        mPresenter.start();
+        mPresenter.start(mainFragment);
         mPresenter.getTopHeadings();
     }
 
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mPresenter.onDestroy();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

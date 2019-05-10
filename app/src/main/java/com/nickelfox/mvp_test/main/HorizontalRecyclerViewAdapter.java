@@ -12,25 +12,25 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nickelfox.mvp_test.R;
-import com.nickelfox.mvp_test.data.model.Article;
+import com.nickelfox.mvp_test.data.source.remote.model.Article;
 
 import java.util.List;
 
-public class HorizontalRecyclerViewAdapter extends RecyclerView.Adapter<HorizontalRecyclerViewAdapter.ListViewHolder>{
+public class HorizontalRecyclerViewAdapter extends RecyclerView.Adapter<HorizontalRecyclerViewAdapter.ListViewHolder> {
 
     private List<Article> list;
     private Context MyContext;
 
-    HorizontalRecyclerViewAdapter(List<Article> list){
-        this.list=list;
+    HorizontalRecyclerViewAdapter(List<Article> list) {
+        this.list = list;
     }
 
     @NonNull
     @Override
     public ListViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        MyContext=viewGroup.getContext();
-        LayoutInflater inflater=LayoutInflater.from(MyContext);
-        View view=inflater.inflate(R.layout.horizontalcardlayout,viewGroup,false);
+        MyContext = viewGroup.getContext();
+        LayoutInflater inflater = LayoutInflater.from(MyContext);
+        View view = inflater.inflate(R.layout.horizontalcardlayout, viewGroup, false);
         return new ListViewHolder(view);
     }
 
@@ -38,8 +38,8 @@ public class HorizontalRecyclerViewAdapter extends RecyclerView.Adapter<Horizont
     public void onBindViewHolder(@NonNull ListViewHolder listViewHolder, final int i) {
         Glide.with(MyContext)
                 .load(list.get(i).getUrlToImage())
-        .crossFade()
-        .into(listViewHolder.Image);
+                .crossFade()
+                .into(listViewHolder.Image);
         listViewHolder.Title.setText(list.get(i).getTitle());
         listViewHolder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,30 +51,30 @@ public class HorizontalRecyclerViewAdapter extends RecyclerView.Adapter<Horizont
         });
     }
 
-    public  void setList(List<Article> list){
-        this.list=list;
+    void setList(List<Article> list) {
+        this.list = list;
         notifyDataSetChanged();
     }
 
     @Override
-    public int getItemCount()
-    {
-        if(list.size()<7){
+    public int getItemCount() {
+        if (list.size() < 7) {
             return list.size();
-        }else {
+        } else {
             return 7;
         }
     }
 
-    public class ListViewHolder extends RecyclerView.ViewHolder{
+    class ListViewHolder extends RecyclerView.ViewHolder {
         CardView cardView;
-     TextView Title;
-     ImageView Image;
-    public ListViewHolder(@NonNull View itemView) {
-        super(itemView);
-        cardView=itemView.findViewById(R.id.News_card);
-        Title=itemView.findViewById(R.id.News_Title);
-        Image=itemView.findViewById(R.id.News_Image);
+        TextView Title;
+        ImageView Image;
+
+        ListViewHolder(@NonNull View itemView) {
+            super(itemView);
+            cardView = itemView.findViewById(R.id.News_card);
+            Title = itemView.findViewById(R.id.News_Title);
+            Image = itemView.findViewById(R.id.News_Image);
+        }
     }
-}
 }

@@ -1,10 +1,9 @@
 package com.nickelfox.mvp_test.data.source.remote;
 
-import android.accounts.NetworkErrorException;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.nickelfox.mvp_test.data.model.Model;
+import com.nickelfox.mvp_test.data.source.remote.model.Model;
 import com.nickelfox.mvp_test.data.source.NewsListDataSource;
 import com.nickelfox.mvp_test.data.source.remote.api.ApiClient;
 import com.nickelfox.mvp_test.data.source.remote.api.ApiService;
@@ -18,20 +17,30 @@ import retrofit2.Response;
 public class NewsListRemoteRepository implements NewsListDataSource {
     private ApiService newsService = ApiClient.getService().create(ApiService.class);
 
+    private static NewsListRemoteRepository INSTANCE;
 
+
+
+    public static NewsListRemoteRepository getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new NewsListRemoteRepository();
+        }
+        return INSTANCE;
+    }
 
     @Override
-    public void fetchList(@NonNull final LoadNewsCallback callback, String category, String country, String language, @NonNull final int listNo) {
+    public void fetchList(@NonNull final LoadNewsCallback callback, String category, String country, String language, final int listNo) {
         final Call<Model> modelCall = newsService.getModelList(category, ApiClient.sKey, country, language);
         modelCall.enqueue(new Callback<Model>() {
             @Override
-            public void onResponse(Call<Model> call, @NonNull Response<Model> response) {
+            public void onResponse(@NonNull Call<Model> call, @NonNull Response<Model> response) {
                 Model model = response.body();
+                assert model != null;
                 callback.onTasksLoaded(model.getArticles(),listNo);
             }
 
             @Override
-            public void onFailure(Call<Model> call, Throwable t) {
+            public void onFailure(@NonNull Call<Model> call, @NonNull Throwable t) {
                 Log.e("onFailure: ", "error Occurred", t);
                 if (t instanceof UnknownHostException){
                     callback.onDataNotAvailable("No Internet");
@@ -43,6 +52,8 @@ public class NewsListRemoteRepository implements NewsListDataSource {
             }
         });
     }
+
+
 
 
     //API Interface file

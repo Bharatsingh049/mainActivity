@@ -2,25 +2,27 @@ package com.nickelfox.mvp_test.data.source;
 
 import android.support.annotation.NonNull;
 
-import com.nickelfox.mvp_test.data.model.Article;
+import com.nickelfox.mvp_test.data.source.local.NewsListLocalRepository;
 import com.nickelfox.mvp_test.data.source.remote.NewsListRemoteRepository;
-
-import java.util.List;
 
 public class NewsListRepository implements NewsListDataSource {
 
 
     private static NewsListRepository INSTANCE;
 
-    private final NewsListDataSource mTasksRemoteDataSource;
+    private final NewsListDataSource mTasksRemoteDataRepository;
 
-    public NewsListRepository(NewsListRemoteRepository mTasksRemoteDataSource) {
-        this.mTasksRemoteDataSource = mTasksRemoteDataSource;
+    private final NewsListDataSource mTasksLocalDataRepository;
+
+
+    private NewsListRepository(NewsListRemoteRepository mTasksRemoteDataRepository,NewsListLocalRepository newsListLocalRepository) {
+        this.mTasksRemoteDataRepository = mTasksRemoteDataRepository;
+        this.mTasksLocalDataRepository = this.mTasksRemoteDataRepository;
     }
 
-    public static NewsListRepository getInstance(NewsListRemoteRepository newsRemoteDataSource) {
+    public static NewsListRepository getInstance(NewsListRemoteRepository newsRemoteDataSource, NewsListLocalRepository newsListLocalRepository) {
         if (INSTANCE == null) {
-            INSTANCE = new NewsListRepository(newsRemoteDataSource);
+            INSTANCE = new NewsListRepository(newsRemoteDataSource,newsListLocalRepository);
         }
         return INSTANCE;
     }
@@ -28,18 +30,9 @@ public class NewsListRepository implements NewsListDataSource {
 
 
     @Override
-    public void fetchList(@NonNull final LoadNewsCallback callback, String category, String country, String language, @NonNull int listNo) {
-        mTasksRemoteDataSource.fetchList(new LoadNewsCallback() {
-
-            @Override
-            public void onTasksLoaded(@NonNull List<Article> newsList, @NonNull int listNo) { callback.onTasksLoaded(newsList,listNo); }
-
-            @Override
-            public void onDataNotAvailable(@NonNull String errorMessage) {
-                callback.onDataNotAvailable(errorMessage);
-            }
-
-
-        },category,country,language,listNo);
+    public void fetchList(@NonNull LoadNewsCallback callback, String category, String country, String language, int listNo) {
+        mTasksRemoteDataRepository.fetchList(callback,category,country,language,listNo);
     }
+
+
 }
