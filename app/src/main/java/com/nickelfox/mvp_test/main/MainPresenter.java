@@ -1,26 +1,28 @@
 package com.nickelfox.mvp_test.main;
 
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.nickelfox.mvp_test.data.source.remote.model.Article;
 import com.nickelfox.mvp_test.data.source.NewsListDataSource;
 import com.nickelfox.mvp_test.data.source.NewsListRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MainPresenter implements MainContract.Presenter {
 
     private final NewsListRepository mMainRepository;
 
-    private String[] category = {"business", "entertainment", "health", "science", "sports", "technology"};
+    private final String[] category = {"business", "entertainment", "health", "science", "sports", "technology"};
 
     private MainContract.View mMainView;
 
-    MainPresenter(NewsListRepository mTasksRepository, MainContract.View mTasksView) {
-        this.mMainRepository = mTasksRepository;
-        this.mMainView = mTasksView;
+    MainPresenter(NewsListRepository mMainRepository, MainContract.View mMainView) {
+        this.mMainRepository = mMainRepository;
+        this.mMainView = mMainView;
 
-        mTasksView.setPresenter(this);
+        mMainView.setPresenter(this);
     }
 
 
@@ -61,6 +63,8 @@ public class MainPresenter implements MainContract.Presenter {
                             mMainView.showTechnologyList(newsList);
                             mMainView.hideLoading();
                             break;
+
+
                     }
                 }
             }

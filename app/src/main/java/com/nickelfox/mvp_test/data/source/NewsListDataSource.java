@@ -14,9 +14,7 @@ public interface NewsListDataSource {
         void onDataNotAvailable(@NonNull String errorMessage);
     }
 
-    interface DeleteNewsCallback{
-        void onNewsDeleted(@NonNull Boolean check);
-    }
+
 
     void fetchList(@NonNull LoadNewsCallback callback, String category, String country, String language, int listNo);
 

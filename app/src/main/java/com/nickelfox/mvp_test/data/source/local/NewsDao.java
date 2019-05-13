@@ -14,9 +14,12 @@ public interface NewsDao {
     List<NewsArticle> getNews();
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insert(List<NewsArticle> newsArticles);
+    long[] insert(List<NewsArticle> newsArticles);
 
     @Query("DELETE FROM newsarticles")
-    void deleteNews();
+    int deleteNews();
+
+    @Query("SELECT COUNT(*) FROM newsarticles")
+    long count();
 
 }

@@ -12,7 +12,7 @@ public class NewsArticle {
     @PrimaryKey(autoGenerate = true)
     @NonNull
     @ColumnInfo(name = "newsid")
-    private String id;
+    private int id;
 
     @NonNull
     @ColumnInfo(name = "title")
@@ -27,22 +27,34 @@ public class NewsArticle {
     private String urlToImage;
 
     @NonNull
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(@NonNull String url) {
+        this.url = url;
+    }
+
+    @NonNull
     @ColumnInfo(name = "category")
     private String category;
 
+    @NonNull
+    @ColumnInfo(name = "url")
+    private String url;
 
     public NewsArticle() {
     }
 
-    public NewsArticle(@NonNull String id, @NonNull String title, @NonNull String description, @NonNull String urlToImage, @NonNull String category) {
-        this.id = id;
+    public NewsArticle(@NonNull String title, @NonNull String description, @NonNull String urlToImage, @NonNull String category, @NonNull String url) {
         this.title = title;
         this.description = description;
         this.urlToImage = urlToImage;
         this.category = category;
+        this.url = url;
     }
 
-    public void setId(@NonNull String id) {
+    public void setId(@NonNull int id) {
         this.id = id;
     }
 
@@ -68,7 +80,7 @@ public class NewsArticle {
     }
 
     @NonNull
-    public String getId() {
+    public int getId() {
         return id;
     }
 
