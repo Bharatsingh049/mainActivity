@@ -1,10 +1,10 @@
 package com.nickelfox.mvp_test.main;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +13,16 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.nickelfox.mvp_test.R;
-import com.nickelfox.mvp_test.data.source.remote.model.Article;
+import com.nickelfox.mvp_test.data.source.remote.model.SamachaarModel;
 
 import java.util.List;
 
 public class HorizontalRecyclerViewAdapter extends RecyclerView.Adapter<HorizontalRecyclerViewAdapter.ListViewHolder> {
 
-    private List<Article> list;
+    private List<SamachaarModel> list;
     private Context MyContext;
 
-    HorizontalRecyclerViewAdapter(List<Article> list) {
+    HorizontalRecyclerViewAdapter(List<SamachaarModel> list) {
         this.list = list;
     }
 
@@ -55,7 +55,7 @@ public class HorizontalRecyclerViewAdapter extends RecyclerView.Adapter<Horizont
         });
     }
 
-    void setList(List<Article> list) {
+    void setList(List<SamachaarModel> list) {
         this.list = list;
         notifyDataSetChanged();
     }

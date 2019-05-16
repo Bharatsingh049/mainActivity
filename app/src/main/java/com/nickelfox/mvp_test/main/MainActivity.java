@@ -1,11 +1,10 @@
 package com.nickelfox.mvp_test.main;
 
-import android.arch.persistence.room.Database;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,7 +12,7 @@ import android.view.MenuItem;
 import com.nickelfox.mvp_test.R;
 import com.nickelfox.mvp_test.data.source.local.NewsDatabase;
 import com.nickelfox.mvp_test.data.source.local.NewsListLocalRepository;
-import com.nickelfox.mvp_test.data.source.remote.model.Article;
+import com.nickelfox.mvp_test.data.source.remote.model.SamachaarModel;
 import com.nickelfox.mvp_test.data.source.NewsListRepository;
 import com.nickelfox.mvp_test.data.source.remote.NewsListRemoteRepository;
 import com.nickelfox.mvp_test.util.ActivityUtils;
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity implements MainFragment.OnLi
 
 
     @Override
-    public void onListFragmentInteraction(Article item) {
+    public void onListFragmentInteraction(SamachaarModel item) {
 
     }
 }

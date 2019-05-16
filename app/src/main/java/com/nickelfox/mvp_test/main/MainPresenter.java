@@ -1,13 +1,11 @@
 package com.nickelfox.mvp_test.main;
 
-import android.support.annotation.NonNull;
-import android.text.TextUtils;
+import androidx.annotation.NonNull;
 
-import com.nickelfox.mvp_test.data.source.remote.model.Article;
+import com.nickelfox.mvp_test.data.source.remote.model.SamachaarModel;
 import com.nickelfox.mvp_test.data.source.NewsListDataSource;
 import com.nickelfox.mvp_test.data.source.NewsListRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MainPresenter implements MainContract.Presenter {
@@ -40,7 +38,7 @@ public class MainPresenter implements MainContract.Presenter {
         mMainRepository.fetchList(new NewsListDataSource.LoadNewsCallback() {
 
             @Override
-            public void onTasksLoaded(@NonNull List<Article> newsList, int listNo) {
+            public void onTasksLoaded(@NonNull List<SamachaarModel> newsList, int listNo) {
 
                 if (mMainView != null) {
                     switch (list_No) {

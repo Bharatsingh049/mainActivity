@@ -1,37 +1,54 @@
 
 package com.nickelfox.mvp_test.data.source.remote.model;
 
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+@Entity(tableName = "newsarticles")
+public class SamachaarModel {
 
-public class Article {
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
+    @ColumnInfo(name = "newsid")
+    private int id;
 
-    @SerializedName("source")
+    /*@SerializedName("source")
     @Expose
     private Source source;
+
     @SerializedName("author")
     @Expose
-    private Object author;
+    private Object author;*/
+
     @SerializedName("title")
     @Expose
     private String title;
+
     @SerializedName("description")
     @Expose
     private String description;
+
     @SerializedName("url")
     @Expose
     private String url;
+
     @SerializedName("urlToImage")
     @Expose
     private String urlToImage;
-    @SerializedName("publishedAt")
+
+    /*@SerializedName("publishedAt")
     @Expose
     private String publishedAt;
+
     @SerializedName("content")
     @Expose
-    private String content;
+    private String content;*/
 
-    public Source getSource() {
+    /*public Source getSource() {
         return source;
     }
 
@@ -45,7 +62,7 @@ public class Article {
 
     public void setAuthor(Object author) {
         this.author = author;
-    }
+    }*/
 
     public String getTitle() {
         return title;
@@ -79,7 +96,7 @@ public class Article {
         this.urlToImage = urlToImage;
     }
 
-    public String getPublishedAt() {
+    /*public String getPublishedAt() {
         return publishedAt;
     }
 
@@ -93,6 +110,6 @@ public class Article {
 
     public void setContent(String content) {
         this.content = content;
-    }
+    }*/
 
 }

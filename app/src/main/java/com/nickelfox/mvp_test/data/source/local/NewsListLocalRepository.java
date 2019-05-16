@@ -1,11 +1,11 @@
 package com.nickelfox.mvp_test.data.source.local;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.Log;
 
 import com.nickelfox.mvp_test.data.source.NewsListDataSource;
-import com.nickelfox.mvp_test.data.source.remote.model.Article;
+import com.nickelfox.mvp_test.data.source.remote.model.SamachaarModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,11 +45,11 @@ public class NewsListLocalRepository implements NewsListDataSource {
             @Override
             public void run() {
                 List<NewsArticle> newsArticleList = newsDao.getNews();
-                List<Article> articleList = new ArrayList<>();
+                List<SamachaarModel> articleList = new ArrayList<>();
                 for (int i = 0; i < 6; i++) {
                     for (NewsArticle newsArticle : newsArticleList) {
                         if (TextUtils.equals(newsArticle.getCategory(), categories[i])) {
-                            Article article = new Article();
+                            SamachaarModel article = new SamachaarModel();
                             article.setTitle(newsArticle.getTitle());
                             article.setDescription(newsArticle.getDescription());
                             article.setUrlToImage(newsArticle.getUrlToImage());
@@ -81,10 +81,10 @@ public class NewsListLocalRepository implements NewsListDataSource {
         insertExecutor.execute(insertRunnable);
     }
 
-    public void setList(List<Article> list, String category) {
+    public void setList(List<SamachaarModel> list, String category) {
 
         //final List<NewsArticle> newsArticleList = new ArrayList<>();
-        for (Article article : list) {
+        for (SamachaarModel article : list) {
             String title = article.getTitle();
             String description = article.getDescription();
             String urlToImage = article.getUrlToImage();

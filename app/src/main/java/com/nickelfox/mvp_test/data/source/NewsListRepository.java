@@ -1,13 +1,12 @@
 package com.nickelfox.mvp_test.data.source;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.nickelfox.mvp_test.data.source.local.NewsListLocalRepository;
 import com.nickelfox.mvp_test.data.source.local.OnDBCallBacks;
 import com.nickelfox.mvp_test.data.source.remote.NewsListRemoteRepository;
-import com.nickelfox.mvp_test.data.source.remote.model.Article;
+import com.nickelfox.mvp_test.data.source.remote.model.SamachaarModel;
 
 import java.util.List;
 
@@ -65,7 +64,7 @@ public class NewsListRepository implements NewsListDataSource {
 
         mNewsRemoteDataRepository.fetchList(new LoadNewsCallback() {
             @Override
-            public void onTasksLoaded(@NonNull final List<Article> newsList, final int listNo) {
+            public void onTasksLoaded(@NonNull final List<SamachaarModel> newsList, final int listNo) {
 
                     switch (listNo) {
                         case 0:
@@ -105,7 +104,7 @@ public class NewsListRepository implements NewsListDataSource {
                 callback.onDataNotAvailable(errorMessage);
                 mNewsLocalDataRepository.fetchList(new LoadNewsCallback() {
                     @Override
-                    public void onTasksLoaded(@NonNull List<Article> newsList, int listNo) {
+                    public void onTasksLoaded(@NonNull List<SamachaarModel> newsList, int listNo) {
 
                         callback.onTasksLoaded(newsList, listNo);
 
@@ -125,7 +124,7 @@ public class NewsListRepository implements NewsListDataSource {
     private void getListFromDB(@NonNull final LoadNewsCallback callback, String language, String country) {
         mNewsLocalDataRepository.fetchList(new LoadNewsCallback() {
             @Override
-            public void onTasksLoaded(@NonNull List<Article> newsList, int listNo) {
+            public void onTasksLoaded(@NonNull List<SamachaarModel> newsList, int listNo) {
 
                 callback.onTasksLoaded(newsList, listNo);
 

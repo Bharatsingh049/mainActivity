@@ -1,7 +1,5 @@
 package com.nickelfox.mvp_test.data.source.local;
 
-import android.support.annotation.NonNull;
-
 public interface OnDBCallBacks {
 
     interface OnDeleteCallBack{

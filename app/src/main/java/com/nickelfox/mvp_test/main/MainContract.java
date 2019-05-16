@@ -1,10 +1,10 @@
 package com.nickelfox.mvp_test.main;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.nickelfox.mvp_test.BasePresenter;
 import com.nickelfox.mvp_test.BaseView;
-import com.nickelfox.mvp_test.data.source.remote.model.Article;
+import com.nickelfox.mvp_test.data.source.remote.model.SamachaarModel;
 
 import java.util.List;
 
@@ -12,17 +12,17 @@ public interface MainContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showBusinessList(@NonNull List<Article> businessList);
+        void showBusinessList(@NonNull List<SamachaarModel> businessList);
 
-        void showEntertainmentList(@NonNull List<Article> entertainmentList);
+        void showEntertainmentList(@NonNull List<SamachaarModel> entertainmentList);
 
-        void showHealthList(@NonNull List<Article> healthList);
+        void showHealthList(@NonNull List<SamachaarModel> healthList);
 
-        void showScienceList(@NonNull List<Article> scienceList);
+        void showScienceList(@NonNull List<SamachaarModel> scienceList);
 
-        void showSportsList(@NonNull List<Article> sportsList);
+        void showSportsList(@NonNull List<SamachaarModel> sportsList);
 
-        void showTechnologyList(@NonNull List<Article> technologyList);
+        void showTechnologyList(@NonNull List<SamachaarModel> technologyList);
 
         void showLoading();
 

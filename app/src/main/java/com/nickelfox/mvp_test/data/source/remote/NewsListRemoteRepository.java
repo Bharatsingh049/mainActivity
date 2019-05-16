@@ -1,6 +1,6 @@
 package com.nickelfox.mvp_test.data.source.remote;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.util.Log;
 
 import com.nickelfox.mvp_test.data.source.remote.model.Model;
@@ -34,9 +34,13 @@ public class NewsListRemoteRepository implements NewsListDataSource {
         modelCall.enqueue(new Callback<Model>() {
             @Override
             public void onResponse(@NonNull Call<Model> call, @NonNull Response<Model> response) {
+
                 Model model = response.body();
-                assert model != null;
-                callback.onTasksLoaded(model.getArticles(),listNo);
+                //Log.e( "onResponse: ",model.getSamachaars().size() );
+
+                if (model != null) {
+                    callback.onTasksLoaded(model.getSamachaars(),listNo);
+                }
             }
 
             @Override

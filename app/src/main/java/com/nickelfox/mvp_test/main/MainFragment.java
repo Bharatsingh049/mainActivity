@@ -4,10 +4,11 @@ import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.Fragment;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.nickelfox.mvp_test.R;
-import com.nickelfox.mvp_test.data.source.remote.model.Article;
+import com.nickelfox.mvp_test.data.source.remote.model.SamachaarModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,7 +38,7 @@ public class MainFragment extends Fragment implements MainContract.View {
 
     private MainContract.Presenter mPresenter;
 
-    private List<Article> businessList, entertainmentList, healthList, scienceList, sportsList, technologyList;
+    private List<SamachaarModel> businessList, entertainmentList, healthList, scienceList, sportsList, technologyList;
 
     private ProgressDialog mProgressDialog;
 
@@ -97,6 +98,15 @@ public class MainFragment extends Fragment implements MainContract.View {
         mProgressDialog.setTitle("Please wait");
         mProgressDialog.setMessage("Loading...");
         mProgressDialog.setCancelable(false);
+
+
+
+        final Observer<List<SamachaarModel>> listObserver =new Observer<List<SamachaarModel>>() {
+            @Override
+            public void onChanged(List<SamachaarModel> articles) {
+
+            }
+        };
     }
 
     @Override
@@ -162,7 +172,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     }
 
     /*@Override
-    public void showList(List<Article> list) {
+    public void showList(List<SamachaarModel> list) {
         int temp = list.size();
         //this.mList=list;
         //sMainFragmentRecyclerViewAdapter.setList(mList);
@@ -170,7 +180,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     }*/
 
     @Override
-    public void showBusinessList(@NonNull List<Article> businessList) {
+    public void showBusinessList(@NonNull List<SamachaarModel> businessList) {
         int temp = businessList.size();
         this.businessList = businessList;
         businessAdapter.setList(businessList);
@@ -178,7 +188,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     }
 
     @Override
-    public void showEntertainmentList(@NonNull List<Article> entertainmentList) {
+    public void showEntertainmentList(@NonNull List<SamachaarModel> entertainmentList) {
         int temp = entertainmentList.size();
         this.entertainmentList = entertainmentList;
         entertainmentAdapter.setList(this.entertainmentList);
@@ -186,7 +196,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     }
 
     @Override
-    public void showHealthList(@NonNull List<Article> healthList) {
+    public void showHealthList(@NonNull List<SamachaarModel> healthList) {
         int temp = healthList.size();
         this.healthList = healthList;
         healthAdapter.setList(this.healthList);
@@ -194,7 +204,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     }
 
     @Override
-    public void showScienceList(@NonNull List<Article> scienceList) {
+    public void showScienceList(@NonNull List<SamachaarModel> scienceList) {
         int temp = scienceList.size();
         this.scienceList = scienceList;
         scienceAdapter.setList(this.scienceList);
@@ -202,7 +212,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     }
 
     @Override
-    public void showSportsList(@NonNull List<Article> sportsList) {
+    public void showSportsList(@NonNull List<SamachaarModel> sportsList) {
         int temp = sportsList.size();
         this.sportsList = sportsList;
         sportsAdapter.setList(this.sportsList);
@@ -210,7 +220,7 @@ public class MainFragment extends Fragment implements MainContract.View {
     }
 
     @Override
-    public void showTechnologyList(@NonNull List<Article> technologyList) {
+    public void showTechnologyList(@NonNull List<SamachaarModel> technologyList) {
         int temp = technologyList.size();
         this.technologyList = technologyList;
         technologyAdapter.setList(this.technologyList);
@@ -252,6 +262,6 @@ public class MainFragment extends Fragment implements MainContract.View {
      */
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onListFragmentInteraction(Article item);
+        void onListFragmentInteraction(SamachaarModel item);
     }
 }

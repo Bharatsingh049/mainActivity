@@ -1,8 +1,8 @@
 package com.nickelfox.mvp_test.main;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,24 +12,24 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.nickelfox.mvp_test.R;
 
-import com.nickelfox.mvp_test.data.source.remote.model.Article;
+import com.nickelfox.mvp_test.data.source.remote.model.SamachaarModel;
 import com.nickelfox.mvp_test.main.MainFragment.OnListFragmentInteractionListener;
 
 
 import java.util.List;
 
 /**
- * {@link RecyclerView.Adapter} that can display a {@link Article} and makes a call to the
+ * {@link RecyclerView.Adapter} that can display a {@link SamachaarModel} and makes a call to the
  * specified {@link OnListFragmentInteractionListener}.
  * TODO: Replace the implementation with code for your data type.
  */
 public class MainFragmentRecyclerViewAdapter extends RecyclerView.Adapter<MainFragmentRecyclerViewAdapter.ViewHolder> {
 
-    private List<Article> mValues;
+    private List<SamachaarModel> mValues;
     private OnListFragmentInteractionListener mListener;
     private Context MyContext;
 
-    public MainFragmentRecyclerViewAdapter(List<Article> items, OnListFragmentInteractionListener listener) {
+    public MainFragmentRecyclerViewAdapter(List<SamachaarModel> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -64,7 +64,7 @@ public class MainFragmentRecyclerViewAdapter extends RecyclerView.Adapter<MainFr
         });
     }
 
-    public void setList(List<Article> list) {
+    public void setList(List<SamachaarModel> list) {
         mValues = list;
         notifyDataSetChanged();
     }
@@ -78,7 +78,7 @@ public class MainFragmentRecyclerViewAdapter extends RecyclerView.Adapter<MainFr
         final View mView;
         final ImageView mImageView;
         final TextView mContentView;
-        Article mItem;
+        SamachaarModel mItem;
 
         ViewHolder(View view) {
             super(view);

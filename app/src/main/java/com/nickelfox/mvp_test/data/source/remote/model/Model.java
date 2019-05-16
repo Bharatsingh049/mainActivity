@@ -14,9 +14,10 @@ public final class Model {
     @SerializedName("totalResults")
     @Expose
     private Integer totalResults;
+
     @SerializedName("articles")
     @Expose
-    private List<Article> articles = null;
+    private List<SamachaarModel> samachaars = null;
 
     public String getStatus() {
         return status;
@@ -34,12 +35,12 @@ public final class Model {
         this.totalResults = totalResults;
     }
 
-    public List<Article> getArticles() {
-        return articles;
+    public List<SamachaarModel> getSamachaars() {
+        return samachaars;
     }
 
-    public void setArticles(List<Article> articles) {
-        this.articles = articles;
+    public void setSamachaars(List<SamachaarModel> samachaars) {
+        this.samachaars = samachaars;
     }
 
 }

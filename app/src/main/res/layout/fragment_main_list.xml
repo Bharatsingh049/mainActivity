@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/Refresh_layout"
@@ -12,7 +12,7 @@
     tools:context=".main.MainFragment"
     tools:showIn="@layout/activity_main">
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -61,7 +61,7 @@
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/business_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
@@ -69,7 +69,7 @@
                     android:layout_marginBottom="10dp"
                     android:background="#eee"
                     android:orientation="horizontal"
-                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </LinearLayout>
 
             <LinearLayout
@@ -109,7 +109,7 @@
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/entertainment_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
@@ -117,7 +117,7 @@
                     android:layout_marginBottom="10dp"
                     android:background="#eee"
                     android:orientation="horizontal"
-                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </LinearLayout>
 
             <LinearLayout
@@ -157,7 +157,7 @@
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/health_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
@@ -165,7 +165,7 @@
                     android:layout_marginBottom="10dp"
                     android:background="#eee"
                     android:orientation="horizontal"
-                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </LinearLayout>
 
             <LinearLayout
@@ -204,7 +204,7 @@
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/science_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
@@ -212,7 +212,7 @@
                     android:layout_marginBottom="10dp"
                     android:background="#eee"
                     android:orientation="horizontal"
-                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </LinearLayout>
 
             <LinearLayout
@@ -253,7 +253,7 @@
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/sports_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
@@ -261,7 +261,7 @@
                     android:layout_marginBottom="10dp"
                     android:background="#eee"
                     android:orientation="horizontal"
-                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </LinearLayout>
 
             <LinearLayout
@@ -300,7 +300,7 @@
                         tools:ignore="HardcodedText" />
                 </LinearLayout>
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/technology_recyclerView"
                     android:layout_width="match_parent"
                     android:layout_height="130dp"
@@ -308,12 +308,12 @@
                     android:layout_marginBottom="10dp"
                     android:background="#eee"
                     android:orientation="horizontal"
-                    app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
             </LinearLayout>
 
         </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
-</android.support.v4.widget.SwipeRefreshLayout><!--
+    </androidx.core.widget.NestedScrollView>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout><!--
 <android.support.v7.widget.RecyclerView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
